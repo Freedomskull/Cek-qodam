@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Qodam</title>
+    <style>
+        body {
+            font-family: 'Creepster', cursive; /* Menggunakan font 'Creepster' */
+            text-align: center;
+            margin-top: 50px;
+            background: #121212; /* Warna latar belakang hitam */
+            color: #FFFFFF; /* Warna teks putih untuk kontras yang jelas */
+        }
+        .container {
+            background-color: rgba(18, 18, 18, 0.8); /* Kotak transparan dengan warna hitam lebih terang */
+            border: 2px solid #F0B90B; /* Border kuning */
+            padding: 20px;
+            margin: auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Bayangan untuk kotak */
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #00FF00; /* Warna teks hijau terang */
+            background-color: rgba(0, 0, 0, 0.7); /* Latar belakang transparan untuk hasil */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        input[type=text], button {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        input[type=text] {
+            width: 70%;
+            background-color: rgba(255, 255, 255, 0.2); /* Kotak input dengan warna putih lebih transparan */
+            color: #FFFFFF; /* Teks putih di kotak input */
+        }
+        button {
+            background-color: #F0B90B; /* Warna tombol kuning */
+            color: #121212; /* Warna teks hitam pada tombol */
+            cursor: pointer;
+            width: 25%;
+        }
+        button:hover {
+            background-color: #DFA809; /* Warna saat tombol di-hover */
+        }
+        marquee {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #F0B90B; /* Warna teks kuning */
+        }
+    </style>
+    <!-- Mengimpor font 'Creepster' dari Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&display=swap">
+</head>
+<body>
+    <div class="container">
+        <h1>Cek Qodam</h1>
+        <form onsubmit="return findAnimal()">
+            <input type="text" id="nameInput" placeholder="Masukkan nama orang">
+            <button type="submit">Cek Qodam</button>
+        </form>
+        <div id="result"></div>
+        <marquee behavior="scroll" direction="left">Komen nama, bantu tap tap, share.</marquee>
+    </div>
+
+    <script>
+        const animals = [
+            'Anjing', 'Beruang', 'Cicak', 'Domba', 'Elang', 'Gajah', 
+            'Harimau', 'Ikan', 'Jerapah', 'Kuda', 'Naga Hitam', 'Naga Emas', 
+            'Singa Afrika', 'Serigala Putih', 'Kuda Terbang', 'Harimau Putih', 
+            'Burung Phoenix', 'Kucing Hitam', 'Naga Air', 'Tangki Cebe', 
+            'Sempak Firaun', 'Sendal Swallow', 'Kak Gem', 'Luwak Albino', 
+            'Kadal Meksiko', 'Klonot Biba'
+        ];
+
+        function getRandomAnimal() {
+            const randomIndex = Math.floor(Math.random() * animals.length);
+            return animals[randomIndex];
+        }
+
+        function findAnimal() {
+            event.preventDefault(); // Mencegah pengiriman form dan reload halaman
+
+            const name = document.getElementById('nameInput').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (name) {
+                const randomAnimal = getRandomAnimal();
+                resultDiv.innerHTML = `<p>Qodam untuk ${name}: <strong>${randomAnimal}</strong></p>`;
+            } else {
+                resultDiv.innerHTML = '<p>Silakan masukkan nama orang.</p>';
+            }
+
+            return false; // Mengembalikan false agar halaman tidak ter-refresh
+        }
+
+        document.getElementById('nameInput').addEventListener('input', function() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = '';
+        });
+    </script>
+</body>
+</html>
